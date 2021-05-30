@@ -40,7 +40,7 @@
             setTimeout(() => {
               console.log(num)
               if(num === 1) {
-                alert(1)
+                // alert(1)
               }
               resolve()
             }, 1000)

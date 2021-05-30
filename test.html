@@ -8,6 +8,67 @@
 <canvas id="canvas" style="border: 1px solid black"/>
 </body>
 <script>
+  // 实现一个红绿灯
+  let lighter = (color) => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(color)
+      }, 1000)
+    })
+  }
+  let colorArr = ['绿灯', '黄灯', '红灯']
+  let key = 0
+  let counter = () => {
+    let result = lighter(colorArr[key]).then(()=>{
+      if (key === 2) {
+        key = 0
+      } else {
+        key++
+      }
+      console.log(result)
+      counter()
+    })
+  }
+
+  (async ()=> {
+    let colorArr = ['绿灯', '黄灯', '红灯']
+    let key = 0
+    while(1) {
+      let result = await lighter(colorArr[key])
+      if (key === 2) {
+        key = 0
+      } else {
+        key++
+      }
+      console.log(result)
+    }
+  })()
+  // deepCopy
+  let ff = (data) => {
+    let result = data.constructor === Array ? [] : {}
+    for (let [key, value] of Object.entries(data)) {
+      result[key] = typeof value === 'object' ? ff(value) : value
+    }
+    return result
+  }
+  const asdfss = [
+    {s: 'a'},
+    {a: [1,2,3]}
+  ]
+  console.log(ff(asdfss))
+  //数元素出现个数
+  let testarr = [1,2,1,3,3,4]
+  let dd = (arr) => {
+    return arr.reduce((acc,cur) => {
+      if (cur in acc) {
+        acc[cur] ++
+      } else {
+        acc[cur] = 1
+      }
+      return acc
+    }, {})
+  }
+  console.log(dd(testarr))
   let test = [1,2,3]
   let max = Math.max(...new Set(test))
   console.log(max)
